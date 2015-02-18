@@ -1,0 +1,100 @@
+.botoneraLogin{
+	text-align: center;
+	margin-top: 2em;
+}
+.loginCenter{
+	position: relative;
+	top: -1em;
+}
+.titulo {
+	text-align: center;
+	font-weight: bold;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	text-shadow: #0B0B0B 1px 1px 5px;
+}
+.dvAvatar{
+	width:100%;
+	text-align: center;
+	box-sizing: border-box;
+	padding:1em;
+}
+.avatar{
+	width:50%;
+	border-radius: 50%;
+	border : solid 4px #fff;
+}
+.headerSearch{
+	width:67% !important;
+	padding: 0px !important;
+	margin:0px !important;
+	border:none !important;
+}
+.headerSearch+.text_after{
+	display:none !important;
+}
+#mapaCajeros {
+	width:1024px;
+	height: 768px;
+	min-height: 340px;
+	visibility:hidden ;
+}
+.mapaVisible{
+	visibility: visible !important;
+}
+.botoneraEstados{
+	text-align: center;
+}
+
+
+
+.headerSearch::-webkit-input-placeholder {
+   color: #fff !important;
+}
+
+.headerSearch:-moz-placeholder { /* Firefox 18- */
+   color: #fff !important;
+}
+
+.headerSearch::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff !important; 
+}
+
+.headerSearch:-ms-input-placeholder {  
+   color: #fff !important; 
+}
+
+
+.modalCajero{
+	width: 80%;
+}
+#mapaModal{
+	width: 100%;
+	min-height: 171px;
+}
+#lblDireccion{
+	margin: 0.3em;
+	font-size: 90%;
+	text-align: center;
+}
+#lblNombreUbicacion{
+	margin: 0.3em;
+	font-size: 90%;
+	text-align: center;
+}
+#lblBanco{
+	margin: 0.3em;
+	font-size: 90%;
+}
+#lblHorario{
+	margin: 0.3em;
+	font-size: 90%;
+}
+@media only screen (orientation : landscape){
+
+}
+
+
+@media only screen (orientation : portrait) {
+
+}

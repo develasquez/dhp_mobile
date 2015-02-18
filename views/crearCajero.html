@@ -1,0 +1,34 @@
+<header class="header z-d2 orange">
+        <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt></button>
+        <h3 class="icon-white">Nuevo Cajero</h3>
+    </header>
+<div class="content">
+    
+    <form ng-controller="cajeroController">
+
+        <div id="mapaNuevoCajero" class="media aspect_16_9"></div>
+        <input type="text" id="txtDireccion" ng-model="txtDireccion" >
+        <i class="icon-1x icon-check icon-orange input-button" ng-click="findAddress(txtDireccion)"></i>
+        <label for="txtDireccion">Ingresa la Dirección</label>
+
+        
+        <input type="text" id="txtNombreUbicacion" ng-model="txtNombreUbicacion" >
+        <label for="txtNombreUbicacion">Local (Ej: Mall Plaza Sesamo)</label>
+
+        <select name="cboBanco" id="cboBanco" ng-model="cboBanco">
+            <option ng-repeat="banco in bancos"   value="{{banco._id}}">{{banco.nombre}}</option>
+        </select>
+        <label for="cboBanco">Selecciona el Banco</label>
+        <select name="cboHorario" id="cboHorario"  ng-model="cboHorario">
+            <option value="1">Comercio</option>
+            <option value="2">24 Horas</option>
+        </select>
+        <label for="cboHorario">Horario Disponibilidad</label>
+
+        <button id="btnCrearCajero" class="floating-button orange floating-down-right
+         " ng-click="crearCajero()">
+            <i class="icon-1x icon-check icon-white"></i>
+        </button>
+        <div class="afterFloating"></div>
+    </form>
+</div>

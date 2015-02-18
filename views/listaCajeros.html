@@ -1,0 +1,60 @@
+<header class="header z-d2 orange">
+               <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt></button>
+               <input type="text" class="headerSearch orange color-white" placeholder="Busca Aqui..." id="lblSearch" ng-model="direccion" >
+               <a href="#/listaCajeros" class="button-right icon-search icon-1x icon-white" ng-click="findNear(direccion)"></a>
+    </header>
+<div class="content white">
+     <ul class="lista divider background_control ">
+    	<a ng-click="verCajero(cajero._id)" ng-repeat="cajero in cajeros.data" cajeroId="{{cajero._id}}">
+            <li>
+                <div>
+                    <div class="test_box fab z-d1">
+
+                    	<i class="icon-map-marker {{cajero.cajero.estado[0]._id==estados.Ok?'icon-blue-grey ':'icon-error'}}"></i>
+                	</div>
+                </div>
+                <div>
+                    <div>
+                        <h3>{{cajero.entidadFinanciera[0].nombre}}</h3>
+                    	<p>{{cajero.direccion}}</p>
+                	</div>
+                    <span class="icon-star icon-1x icon-grey " ng-click="favorito('{{cajero._id}}')" >
+                        
+                    </span>
+    			</div>                
+        	</li>
+    	</a>
+    </ul>
+    <div class="modalCajero modal-dialog fade background_control z-d5">
+        <div id="mapaModal" class="aspect_16_9">
+            &nbsp;
+        </div>
+        <div class="botoneraMapaPopup">
+            <button id="btnEditCajero" class="floating-button green 
+             " ng-click="esitCajero()">
+                <i class="icon-1x icon-edit icon-white"></i>
+            </button>
+        </div>  
+        <h2 id="lblDireccion" class="color-blue">{{lblDireccion}}</h2>
+        <h3 id="lblNombreUbicacion" class="color-light-blue" >{{lblNombreUbicacion}}</h3>
+        <h4 name="lblBanco" id="lblBanco" class="color-grey">{{lblBanco}}</h4>
+        <h4 name="lblHorario" id="lblHorario" class="color-grey">{{lblHorario}}</h4>
+        <div class="botoneraEstados">
+            <button id="setCajeroOK" class="raise-button green 
+             " ng-click="setCajeroOK()">
+                <i class="icon-1x icon-check icon-white"></i>
+            </button>
+            <button id="btnCajeroBad" class="raise-button red 
+             " ng-click="btnCajeroBad()">
+                <i class="icon-1x icon-times icon-white"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<footer class="footer background_control z-d2">
+    <div class="footerHeader">
+        <button class="expand-Footer button-left icon-arrows-alt icon-1x icon-orange" ng-click="showMap()"></button>
+        <h3>Ver Mapa</h3>
+    </div>
+    <div id="mapaCajeros" class="media aspect_Full {{mapaVisible}}"></div>
+</footer>
