@@ -41,17 +41,17 @@
 	var __displayedMenu= false;
 	var em = 16;
 	em = getEmPixels();
-	var _availHeight= screen.height - (em * 3) -15;
+	var _availHeight= window.innerHeight - (em * 3) -15;
 	var _headerHeight = 0 ;
 	var _footerHeight = 0 ;
 	var pointerdownLeft = 0;
 	var SWIPELONG = 30;
 	var _window ={
-		width : screen.width,
-	    height : screen.height
+		width : window.innerWidth,
+	    height : window.innerHeight
 	};
 	var _content ={
-	    width : screen.width,
+	    width : window.innerWidth,
 	    height :_availHeight
 	};
 	_footer ={};
@@ -263,8 +263,8 @@ monomer = {
 				$(element).height(monomer.__getAvalilableHeight(element));
 			});
 			_window={
-	        	width :screen.width,
-	            height :screen.height
+	        	width :window.innerWidth,
+	            height :window.innerHeight
 	        }
 	        if($(".page > .header").height() > 0){
                 _headerHeight= em * 3 + 14;
@@ -283,15 +283,15 @@ monomer = {
 	        	height:_footerHeight
             }
             _content={
-	        	width :screen.width,
-	            height :screen.height - _header.height - _footer.height
+	        	width :window.innerWidth,
+	            height :window.innerHeight - _header.height - _footer.height
 	        }
 	        $("body").width(_window.width).height(_window.height);
 			$(".content").height(_content.height );
 			$(".leftMenu").height(_content.height + _header.height);
 			$(".page").height(_content.height + _header.height + _footer.height );
 	    	
-	    	_availHeight= screen.height - _header.height - _footer.height;
+	    	_availHeight= window.innerHeight - _header.height - _footer.height;
 
 	    	$(".centred-verticaly").each(function (i,e) {
 	    		if($(e).height() < $(e).parent().height() ){
@@ -440,7 +440,7 @@ monomer = {
 			},500);
 		});
 	    setInterval(function () {
-	    	//if(!(_window.width == screen.width && _window.height == screen.height)){
+	    	//if(!(_window.width == window.innerWidth && _window.height == window.innerHeight)){
 				monomer.__setAspect();
 			//}	
 	        $("input, select").trigger("change");
