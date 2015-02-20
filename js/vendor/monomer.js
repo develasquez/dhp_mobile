@@ -203,6 +203,12 @@ monomer = {
 		dialog:function (options) {
 			
 		},
+		showLoading:function () {
+			$(".loading").show();	
+		},
+		hideLoading:function () {
+			$(".loading").hide();
+		},
 		showDialog:function  (el) {
 			//$(el).show();
 			$(el).addClass("in");
@@ -266,6 +272,7 @@ monomer = {
 	        	width :window.innerWidth,
 	            height :window.innerHeight
 	        }
+	        $(".loading").css({"top":(window.innerHeight / 2)- em,"left":(window.innerWidth / 2) - em});
 	        if($(".page > .header").height() > 0){
                 _headerHeight= em * 3 + 14;
 			}
@@ -390,6 +397,7 @@ monomer = {
 	$(function () {
 		 $("body").append($("<div>").addClass("_touch"));
 		 $("body").append($("<div>").addClass("modal-backdrop").addClass("fade"));
+		 $("body").append($("<div>").addClass("loading icon-spinner icon-2x"));
 		 $("body").on("touchstart",function (event) {
 
 	    		pointerdownLeft = event.originalEvent.changedTouches[0].clientX
@@ -431,7 +439,7 @@ monomer = {
 					monomer.__hideRightMenu()
 					__displayedMenu= false;
 				}
-			})		
+			})	
 		$(window).on("hashchange",function () {
 			setTimeout(function () {
 				monomer.__init();
@@ -440,15 +448,15 @@ monomer = {
 			},500);
 		});
 	    setInterval(function () {
-	    	//if(!(_window.width == window.innerWidth && _window.height == window.innerHeight)){
+	    	if(!(_window.width == window.innerWidth && _window.height == window.innerHeight)){
 				monomer.__setAspect();
-			//}	
-	        $("input, select").trigger("change");
+			}	
+	        //$("input, select").trigger("change");
 	    }, 100);
 		setTimeout(function () {
 			monomer.__init();
 			monomer.__setAspect();
-		},100);
+		},500);
 		
 	})
 

@@ -453,14 +453,14 @@ border: none;
   -ms-filter: "blur(25px)";
   filter: blur(25px);
 }
-.overlay{
+/*.overlay{
       padding-top: 3em;
       position:absolute;
       top:0;
       left:0;
       z-index: 1500;
       background-color: rgb(255,255,255,.7)
-}
+}*/
 
 .card{
     min-width: 250px;
@@ -752,6 +752,21 @@ input[type="text"]+label+.input-button,input[type="password"]+label+.input-butto
   margin-bottom: 1em;
 }
 
+.loading{
+  margin: 0 auto;
+  z-index: 6000;
+  position: absolute;
+  top:0;
+  left:0;
+  -webkit-animation: spin 1s infinite linear, colors 3s infinite ;
+  -moz-animation: spin 1s infinite linear, colors 3s infinite ;
+  -o-animation: spin 1s infinite linear, colors 3s infinite ;
+  animation: spin 1s infinite linear, colors 3s infinite ;
+  display:none;
+}
+
+
+
 .modal-dialog {
   position: absolute;
   top: 0;
@@ -802,7 +817,7 @@ input[type="text"]+label+.input-button,input[type="password"]+label+.input-butto
   right: 0;
   left: 0;
   background: rgba(0,0,0,.1);
-  z-index: 2500;
+  z-index: 20;
 }
 .fade {
   opacity: 0;
@@ -1757,10 +1772,10 @@ input[type="radio"]:checked:before{
   font-size: 5em;
 }
 .icon-spin {
-  -webkit-animation: spin 1s  linear;
-  -moz-animation: spin 1s  linear;
-  -o-animation: spin 1s  linear;
-  animation: spin 1s  linear;
+  -webkit-animation: spin 1s infinite linear;
+  -moz-animation: spin 1s infinite linear;
+  -o-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
 }
 .icon-spin-down:before {
   -webkit-animation: spin .1s  linear;
@@ -1768,6 +1783,81 @@ input[type="radio"]:checked:before{
   -o-animation: spin .1s  linear;
   animation: spin .1s  linear;
 }
+
+
+@-moz-keyframes colors {
+  0% {
+    color:red;
+
+  }
+  25% {
+    color:blue;
+
+  }
+  75% {
+    color:yellow;
+
+  }
+  100% {
+    color:green;
+
+  }
+}
+@keyframes colors {
+  0% {
+    color:red;
+
+  }
+  25% {
+    color:blue;
+
+  }
+  75% {
+    color:yellow;
+
+  }
+  100% {
+    color:green;
+
+  }
+}
+@-webkit-keyframes colors {
+  0% {
+    color:red;
+
+  }
+  25% {
+    color:blue;
+
+  }
+  75% {
+    color:yellow;
+
+  }
+  100% {
+    color:green;
+
+  }
+}
+@-o-keyframes colors {
+  0% {
+    color:red;
+
+  }
+  25% {
+    color:blue;
+
+  }
+  75% {
+    color:yellow;
+
+  }
+  100% {
+    color:green;
+
+  }
+}
+
 @-moz-keyframes spin {
   0% {
     -moz-transform: rotate(0deg);

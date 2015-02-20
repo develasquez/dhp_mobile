@@ -24,6 +24,7 @@
       $scope.obtenerPuntos =function (token,user_id ) {   
         dhpGamificationServices.obtenerPuntos(token,user_id)
         .then(function (data) {
+          
             $scope.puntosUsuario= data.data[0].puntos;
           }); 
       };
@@ -31,12 +32,14 @@
       $scope.agregarPuntos =function (token,user_id,puntos) {   
         dhpGamificationServices.agregarPuntos(token,user_id, puntos)
         .then(function (data) {
+          
         }); 
       };
       //obtenerMedall as
       $scope.obtenerMedallas =function (token) {   
         dhpGamificationServices.obtenerMedallas(token)
         .then(function (data) {
+          
             $scope.medallas= data.data;
         }); 
       };
@@ -44,6 +47,7 @@
       $scope.obtenerMedallasUsuario =function (token,user_id) {   
         dhpGamificationServices.obtenerMedallasUsuario(token,user_id)
         .then(function (data) {
+          
             $scope.medallasUsuario= data.data;
         }); 
       };
@@ -51,6 +55,7 @@
       $scope.obtenerRetosUsuario =function (token,user_id) {   
         dhpGamificationServices.obtenerRetosUsuario(token,user_id)
         .then(function (data) {
+          
             $scope.medallasUsuario= data.data;
         }); 
       };
@@ -58,6 +63,7 @@
        $scope.obtenerRetos =function (token) {   
         dhpGamificationServices.obtenerRetos(token)
         .then(function (data) {
+          
             $scope.retos= data;
         }); 
       };
@@ -65,6 +71,7 @@
       $scope.obtenerNiveles =function (token) {   
         dhpGamificationServices.obtenerNiveles(token)
         .then(function (data) {
+          
             $scope.niveles= data;
         }); 
       };
@@ -72,6 +79,7 @@
       $scope.obtenerActividades =function (token) {   
         dhpGamificationServices.obtenerActividades(token)
         .then(function (data) {
+          
             $scope.actividades= data;
         }); 
       };
@@ -131,6 +139,7 @@
         };
         $scope.getSession = function  (user, password ) {
             dhpService.sesion(user,password).then(function (data) {  
+              
             if (data.data){
               $scope.saveUser(user,password);
               $scope.sesion= data.data[0];
@@ -157,6 +166,7 @@
         $scope.getPerfiles = function () {
           dhpService.getPerfiles()
           .then(function (data) {
+            
             $scope.perfiles = data;
           });
         };
@@ -176,6 +186,7 @@
       $scope.getBancos = function () {
         dhpService.getBancos()
           .then(function (data) {
+            
             $scope.bancos = data;
           });
       };
@@ -199,6 +210,7 @@
         };
         dhpService.crearCajero(nuevoCajero,$scope.sesion.token)
         .then(function (data) {
+          
             $scope.agregarPuntosXActividad($scope.sesion.token, $scope.usuario, enumActividades.Crear_Cajero);
         });
       };
@@ -269,6 +281,7 @@
     
           dhpService.findNear($scope.sesion.token, ubicacion )
           .then(function (data) {
+            
 
             $scope.myPosition = data.myPosition;
             $scope.cajeros = data;
@@ -279,6 +292,7 @@
         $scope.txtDireccion = direccion;
         dhpService.findAddress($scope.sesion.token, direccion)
         .then(function (data) {
+          
           $scope.txtDireccion = data.data.formatted_address.split(",")[0];
           $scope.ciudad = data.data.formatted_address.split(",")[2];
           $scope.setMarker(data, 'mapaNuevoCajero');
