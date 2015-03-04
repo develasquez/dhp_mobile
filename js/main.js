@@ -1,39 +1,24 @@
-(function () {
+var app = {
+    initialize: function() {
+        this.bindEvents();
+    },
+    bindEvents: function() {
+        document.EventListener('deviceready', this.onDeviceReady, false);
+    },
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
 
-	var app = angular.module('dhp',[
-		'ngRoute',
-		'dhp.gamificationServices',
-    'dhp.directives',
-		'dhp.controllers',
-		'dhp.services',
-		]);
-	app.config(['$routeProvider', function ($routeProvider) {
+    },
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+    }
+};
 
-    $routeProvider
-       .when('/splash', {
-        templateUrl: 'views/splash.html'
-      })
-      .when('/listaCajeros', {
-        templateUrl: 'views/listaCajeros.html'
-      })
-      .when('/cajero/new', {
-        templateUrl: 'views/crearCajero.html'
-      })
-      .when('/cajero/update/:id', {
-        templateUrl: 'views/pokemon.html',
-        controller: 'cajeroController'
-      })
-      .when('/cajero/:id', {
-        templateUrl: 'views/verCajero.html',
-        controller: 'cajeroController'
-      })
-      .when('/usuario/perfil', {
-        templateUrl: 'views/usuario.html'
-      })
-      .otherwise({
-        redirectTo: '/splash'
-      });
-
-	}]);
-})(); 
-
+$(function(){
+  debugger;
+    monomer.pageShow("#splash");
+});

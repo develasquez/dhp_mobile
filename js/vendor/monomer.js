@@ -39,11 +39,11 @@
 
 	var _window={};
 	var __displayedMenu= false;
-	var em = 16;
-	em = getEmPixels();
+	var em = getEmPixels() || 16;
 	var _availHeight= window.innerHeight - (em * 3) -15;
 	var _headerHeight = 0 ;
 	var _footerHeight = 0 ;
+	var pointerdownTop = 0;
 	var pointerdownLeft = 0;
 	var SWIPELONG = 30;
 	var _window ={
@@ -58,6 +58,19 @@
 	_header = {};
 
 monomer = {
+	    pageShow:function (page) {
+	    	debugger;
+        	$(".page").hide();
+        	$(page).show();
+        	$(page).velocity({"margin-left": -window.innerWidth});
+    	},
+    	pageClose:function (page) {
+        	$(page).velocity({"margin-left": 0},function () {
+            	setTimeout(function () {
+                	$(page).hide();
+            	},200)
+        	});
+    	},
 		toast:function(e){
 			$("#toastArea").append($("<div>")
 								.addClass("toast")
@@ -164,7 +177,7 @@ monomer = {
 		},
 		__expandConfig:function (element,event) {
 			__displayedMenu= false;
-			element.css({"top":event.originalEvent.clientY - 10, "left":event.originalEvent.clientX -250});
+			element.css({"top":event.clientY - 10, "left":event.clientX -250});
 			element.toggleClass("configMenu-expanded");
 			monomer.__enableBodyTouch();	
 		},
@@ -410,18 +423,18 @@ monomer = {
 		 $("body").append($("<div>").addClass("loading icon-spinner icon-2x"));
 		 $("body").on("touchstart",function (event) {
 
-	    		pointerdownLeft = event.originalEvent.changedTouches[0].clientX
-	    		pointerdownTop = event.originalEvent.changedTouches[0].clientY
+	    		pointerdownLeft = event.changedTouches[0].clientX
+	    		pointerdownTop = event.changedTouches[0].clientY
 	     }) 
 
 		 $("body").on("touchend",function (event) {
 		    	pointerdownLeft = pointerdownLeft?pointerdownLeft: 0;
 		    	pointerdownTop = pointerdownTop?pointerdownTop: 0;
 		    		switch(true){
-		    			case(pointerdownLeft - event.originalEvent.changedTouches[0].clientX) > SWIPELONG:{
+		    			case(pointerdownLeft - event.changedTouches[0].clientX) > SWIPELONG:{
 		    				monomer.__hideLeftMenu();
 	                                    }break;
-		    			case (pointerdownLeft - event.originalEvent.changedTouches[0].clientX) < -SWIPELONG:{
+		    			case (pointerdownLeft - event.changedTouches[0].clientX) < -SWIPELONG:{
 		    				monomer.__hideRightMenu()
 							if (pointerdownLeft < (_window.width /2)) {
 		    					monomer.__expandLeftMenu();
@@ -429,12 +442,12 @@ monomer = {
 		    				};
 		    			}break;	
 
-		    			case(pointerdownTop - event.originalEvent.changedTouches[0].clientY) > SWIPELONG:{
+		    			case(pointerdownTop - event.changedTouches[0].clientY) > SWIPELONG:{
 		    				if (pointerdownTop > (_window.height - _footer.height )) {
 		    					monomer.__expandFooter();
 		    				}
 		    			}break;
-		    			case (pointerdownTop - event.originalEvent.changedTouches[0].clientY) < -SWIPELONG:{
+		    			case (pointerdownTop - event.changedTouches[0].clientY) < -SWIPELONG:{
 							if (pointerdownTop < (em * 6)) {
 		    					monomer.__hideFooter();
 		    				}

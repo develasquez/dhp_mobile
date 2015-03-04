@@ -1,7 +1,6 @@
-<!--http://blogs.missouristate.edu/web/2010/05/12/google-maps-api-v3-developing-for-mobile-devices/-->
 <!DOCTYPE html>
 
-<html class="no-js" ng-app="dhp" ng-controller="gamificationController">
+<html class="no-js" >
     <head >
         <meta charset="utf-8">
         <title>Donde Hay Plata?</title>
@@ -12,17 +11,16 @@
         <meta name="mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/monomer.css">
         <link rel="stylesheet" href="css/main.css">
-        <script type="text/javascript" src="js/vendor/angular.min.js"></script>
-        <script type="text/javascript" src="js/vendor/jquery-2.1.0.min.js"></script>    
-        <script type="text/javascript" src="js/vendor/i18n/angular-locale_es-cl.js"></script>
+        <script type="text/javascript" src="js/vendor/zepto.min.js"></script>
         <script type="text/javascript" src="js/vendor/pointerevents.js"></script>
         <script type="text/javascript" src="js/vendor/monomer.js"></script>
+        <script type="text/javascript" src="js/vendor/velocity.min.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBQt4GWN0vDHnhjeVbBrfw1lPxlgXgm7xc&sensor=false"></script>
     </head>
-    <body ng-controller="sesionController">
+    <body >
         <nav class="leftMenu z-d1 background_control">
             <ul class="lista  ">
-                <a href="#/listaCajeros"  ng-click="findNear()">
+                <a href="#/listaCajeros"  onClick="app.findNear()">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -72,7 +70,7 @@
                         
                     </li>
                 </a>
-                <a  ng-click="closeSession()">
+                <a  onClick="app.closeSession()">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -92,15 +90,189 @@
             </ul>
         </nav>
 
-       <div ng-view ng-controller="busquedaController" class="page">
-       </div>
+        <div class="pages">
+<!--splash-->
+            <div id="splash" class="page">
+                <div class="content orange">
+                    <div class="botoneraLogin" >
+                        <button class="floating-button z-d3 light-blue " >
+                            <i class="icon-twitter icon-1x color-white"></i>
+                        </button>
+                        <button class="floating-button z-d3 red loginCenter">
+                            <i class="icon-google-plus icon-1x color-white"></i>
+                        </button>
+                        <button class="floating-button z-d3 blue ">
+                            <i class="icon-facebook icon-1x color-white"></i>
+                        </button>
+                    </div>
+                    <div class="dvAvatar aspect_16_9 ">
+                        <img src="" alt="" class="avatar" id="avatarUsuario" >
+                    </div>    
+                    <div class="botoneraLogin" >
+                        <button id="btnCrearCajero" class="floating-button z-d3 grey " onClick="showLogin()">
+                            <i class="icon-1x icon-envelope-o icon-white"></i>
+                        </button>
+                    </div>
+                    <div class="modal-dialog fade card background_control z-d3 login" >
+                        <div class="header">
+                            <h2 class="color-light-blue center">Iniciar Sesión</h2>    
+                        </div> 
+                        <input type="text" id="txtUsuario" value="felipe@desamovil.cl">
+                        <label for="txtUsuario">Usuario</label> 
+                        <input type="password" id="txtPassword"  value="123456">
+                        <label for="txtPassword">Contraseña</label> 
+                        <center>
+                            <button onClick="login()" class="raised-button blue color-white">Login</button>
+                            <button onClick="hideLogin()" class="raised-button grey color-white">Cancelar</button>
+                        </center>    
+                    </div>
+                </div>
+            </div>
+<!--crearCajero-->
+            <div id="crearCajero" class="page">
+                <header class="header orange">
+                    <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt></button>
+                    <h3 class="icon-white">Nuevo Cajero</h3>
+                </header>
+                <div class="content">
+                    
+                    <form ng-controller="cajeroController">
+
+                        <div id="mapaNuevoCajero" class="media aspect_16_9"></div>
+                        <input type="text" id="txtDireccion" ng-model="txtDireccion" >
+                        <i class="icon-1x icon-check icon-orange input-button" ng-click="findAddress(txtDireccion)"></i>
+                        <label for="txtDireccion">Ingresa la Dirección</label>
+
+                        
+                        <input type="text" id="txtNombreUbicacion" ng-model="txtNombreUbicacion" >
+                        <label for="txtNombreUbicacion">Local (Ej: Mall Plaza Sesamo)</label>
+
+                        <select name="cboBanco" id="cboBanco" ng-model="cboBanco">
+                            <option ng-repeat="banco in bancos"   value="{{banco._id}}">{{banco.nombre}}</option>
+                        </select>
+                        <label for="cboBanco">Selecciona el Banco</label>
+                        <select name="cboHorario" id="cboHorario"  ng-model="cboHorario">
+                            <option value="1">Comercio</option>
+                            <option value="2">24 Horas</option>
+                        </select>
+                        <label for="cboHorario">Horario Disponibilidad</label>
+
+                        <button id="btnCrearCajero" class="floating-button orange floating-down-right
+                         " ng-click="crearCajero()">
+                            <i class="icon-1x icon-check icon-white"></i>
+                        </button>
+                        <div class="afterFloating"></div>
+                    </form>
+                </div>
+            </div>
+<!--listarCajeros-->
+            <div id="listarCajeros" class="page">
+                <header class="header z-d2 orange">
+                    <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt></button>
+                    <input type="text" class="headerSearch orange color-white" placeholder="Busca Aqui..." id="lblSearch" ng-model="direccion" >
+                    <a href="#/listaCajeros" class="button-right icon-search icon-1x icon-white" ng-click="findNear(direccion)"></a>
+                </header>
+                <div class="content white">
+                     <ul class="lista divider background_control ">
+                        <a ng-click="verCajero(cajero._id)" ng-repeat="cajero in cajeros.data" cajeroId="{{cajero._id}}" on-finish-render="ngRepeatFinished">
+                            <li>
+                                <div>
+                                    <div class="test_box fab z-d1">
+
+                                        <i class="icon-map-marker {{cajero.cajero.estado[0]._id==estados.Ok?'icon-blue-grey ':'icon-error'}}"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <h3>{{cajero.entidadFinanciera[0].nombre}}</h3>
+                                        <p>{{cajero.direccion}}</p>
+                                    </div>
+                                    <span class="icon-star icon-1x icon-grey " ng-click="favorito('{{cajero._id}}')" >
+                                        
+                                    </span>
+                                </div>                
+                            </li>
+                        </a>
+                    </ul>
+                    <div class="modalCajero modal-dialog fade background_control z-d5">
+                        <div id="mapaModal" class="aspect_16_9">
+                            &nbsp;
+                        </div>
+                        <div class="botoneraMapaPopup">
+                            <button id="btnEditCajero" class="floating-button green 
+                             " ng-click="esitCajero()">
+                                <i class="icon-1x icon-edit icon-white"></i>
+                            </button>
+                        </div>  
+                        <h2 id="lblDireccion" class="color-blue">{{lblDireccion}}</h2>
+                        <h3 id="lblNombreUbicacion" class="color-light-blue" >{{lblNombreUbicacion}}</h3>
+                        <h4 name="lblBanco" id="lblBanco" class="color-grey">{{lblBanco}}</h4>
+                        <h4 name="lblHorario" id="lblHorario" class="color-grey">{{lblHorario}}</h4>
+                        <div class="botoneraEstados">
+                            <button id="setCajeroOK" class="raise-button green 
+                             " ng-click="setCajeroOK()">
+                                <i class="icon-1x icon-check icon-white"></i>
+                            </button>
+                            <button id="btnCajeroBad" class="raise-button red 
+                             " ng-click="btnCajeroBad()">
+                                <i class="icon-1x icon-times icon-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer background_control z-d2">
+                    <div class="footerHeader">
+                        <button class="expand-Footer button-left icon-arrows-alt icon-1x icon-orange" ng-click="showMap()"></button>
+                        <h3>Ver Mapa</h3>
+                    </div>
+                    <div id="mapaCajeros" class="media aspect_Full {{mapaVisible}}"></div>
+                </footer>
+            </div>
+<!--usuario-->
+            <div id="usuario" class="page">
+                <header class="header red">
+                    <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt></button>
+                    <h3 class="icon-white">Tu Perfil</h3>
+                </header>
+                <div class="content">
+                    
+                    <form ng-controller="sesionController">
+
+                        <div class="dvAvatar aspect_16_9 red">
+                            <img src="{{Avatar}}" alt="" class="avatar" id="avatarUsuario" >
+                        </div>
+                             
+                        <select name="" id="cboPaisUsuario" ng-model="cboPaisUsuario">
+                        </select>
+                        <label for="cboPaisUsuario">Pais</label>
+                        
+                        <input type="text" id="txtNombreUsuario" ng-model="txtNombreUsuario">
+                        <label for="txtNombreUsuario">Nombre</label>
+                        
+                        <input type="text" id="txtEmailUsuario" ng-model="txtEmailUsuario">
+                        <label for="txtEmailUsuaro">Email</label>
+                        
+                        <input type="text" class="" id="txtMovilUsuario" ng-model="txtMovilUsuario">
+                        <label for="txtMovilUsuario">Móvil</label>
+
+                        <label id="lblPerfilUsuario" class="displayField" ng-model="lblPerfilUsuario">perfil</label>
+
+                        <label id="lblNivelUsuario" class="displayField" ng-model="lblNivelUsuario">Nivel</label>
+
+                        <lable id="lblPuntos" class="displayField" ng-model="puntosUsuario"></lable>
+                        
+                        <label id="lblfechaCreacion" class="displayField" ng-model="lblfechaCreacion"></label>
+                        
+                        <button id="btnGuardarUsuario" class="floating-button red floating-down-right  
+                         " ng-click="guardarUsuario()">
+                            <i class="icon-1x icon-check icon-white"></i>
+                        </button>
+                        <div class="afterFloating"></div>
+                    </form>
+                </div>
+            </div>            
+        </div>
     </body>
-    <script src="js/vendor/angular-route.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/gamificationServices.js"></script>
     <script src="cordova.js"></script>
 </html>
