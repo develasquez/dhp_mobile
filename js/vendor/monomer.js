@@ -59,7 +59,6 @@
 
 monomer = {
 	    pageShow:function (page) {
-	    	debugger;
         	$(".page").hide();
         	$(page).show();
         	$(page).velocity({"margin-left": -window.innerWidth});

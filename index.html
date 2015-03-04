@@ -109,7 +109,7 @@
                         <img src="" alt="" class="avatar" id="avatarUsuario" >
                     </div>    
                     <div class="botoneraLogin" >
-                        <button id="btnCrearCajero" class="floating-button z-d3 grey " onClick="showLogin()">
+                        <button id="btnCrearCajero" class="floating-button z-d3 grey " onClick="session.showLogin()">
                             <i class="icon-1x icon-envelope-o icon-white"></i>
                         </button>
                     </div>
@@ -122,8 +122,8 @@
                         <input type="password" id="txtPassword"  value="123456">
                         <label for="txtPassword">Contraseña</label> 
                         <center>
-                            <button onClick="login()" class="raised-button blue color-white">Login</button>
-                            <button onClick="hideLogin()" class="raised-button grey color-white">Cancelar</button>
+                            <button onClick="splash.login()" class="raised-button blue color-white">Login</button>
+                            <button onClick="session.hideLogin()" class="raised-button grey color-white">Cancelar</button>
                         </center>    
                     </div>
                 </div>
