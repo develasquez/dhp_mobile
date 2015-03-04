@@ -19,6 +19,5 @@ var app = {
 };
 
 $(function(){
-  debugger;
     monomer.pageShow("#splash");
 });
