@@ -3,6 +3,7 @@
 	var app = angular.module('dhp',[
 		'ngRoute',
 		'dhp.gamificationServices',
+    'dhp.directives',
 		'dhp.controllers',
 		'dhp.services',
 		]);

@@ -310,6 +310,15 @@ monomer = {
 			$(".floating-down-left").css({"top": _window.height - _footer.height  - (em * 4) - 56 , "left" : em * 2});
 			$(".floating-down-right").css({"top": _window.height -  _footer.height - (em * 4) - 56 , "left" : _window.width - (em * 2) - 56});
 		},
+		list:{
+			update:function () {
+				$(".lista li").unbind('pointerup');
+				$(".lista li").on('pointerup',function (event) {
+				$(".lista li").removeClass("li_hover");
+					$(this).addClass("li_hover");
+				});
+			}
+		},
 		__init : function () {
 			if($("#toastArea").length == 0 ){
 				$("body").append($("<div>").attr("id","toastArea"));
@@ -355,6 +364,7 @@ monomer = {
 				})
 
 			})
+			monomer.list.update();
 			$(".modal-backdrop").unbind("click");
 			$(".modal-backdrop").on("click",function () {
 				monomer.hideDialog();
@@ -444,7 +454,6 @@ monomer = {
 			setTimeout(function () {
 				monomer.__init();
 				monomer.__setAspect();
-
 			},500);
 		});
 	    setInterval(function () {

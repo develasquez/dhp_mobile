@@ -5,7 +5,7 @@
     </header>
 <div class="content white">
      <ul class="lista divider background_control ">
-    	<a ng-click="verCajero(cajero._id)" ng-repeat="cajero in cajeros.data" cajeroId="{{cajero._id}}">
+    	<a ng-click="verCajero(cajero._id)" ng-repeat="cajero in cajeros.data" cajeroId="{{cajero._id}}" on-finish-render="ngRepeatFinished">
             <li>
                 <div>
                     <div class="test_box fab z-d1">

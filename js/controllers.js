@@ -13,6 +13,9 @@
 	var horarios = ["Seleccione","Comercio","24 Horas"];
   angular.module('dhp.controllers', [])
     .controller('gamificationController', ['$scope', '$routeParams', 'dhpGamificationServices', function ($scope, $routeParams, dhpGamificationServices) {
+      $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+        monomer.__init();
+      });
       $scope.puntosUsuario=0;
       $scope.medallas=[];
       $scope.medallasUsuario =[];
