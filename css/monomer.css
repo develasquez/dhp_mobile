@@ -1132,7 +1132,7 @@ input[type="text"]+label+.input-button,input[type="password"]+label+.input-butto
     z-index: 100;
 }
 .floating-down-right{
-    position: absolute;
+    position: fixed;
     z-index: 100;
 }
 
@@ -1161,9 +1161,10 @@ select + label ,
  input[type="password"] +  i +label,
  input[type="number"] +  i +label,
  input[type="datetime"] +  i +label{
+  font-size: 100% ;
   margin-left: 1em;
   position: relative;
-  top: -3rem;
+  top: -3.5rem;
   color: #ccc;
   display:inline-block;
   min-width: 300px;
@@ -1183,8 +1184,8 @@ input[type="text"] + i +label.active,
 input[type="password"] + i +label.active, 
 input[type="number"] + i +label.active, 
 input[type="datetime"] + i +label.active{
-  font-size: 80% ;
-  top: -5.5em ;
+  font-size: 90% ;
+  top: -7em ;
   margin-left: 1.5em ;
   color:#03a9f4 ;
 }
