@@ -21,7 +21,7 @@
     <body >
         <nav class="leftMenu z-d1 background_control">
             <ul class="lista  ">
-                <a href="#"  onClick="monomer.pageShow('#listaCajeros')">
+                <a href="javascript:void(0)"  onClick="monomer.pageShow('#listarCajeros')">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -37,7 +37,7 @@
                         
                     </li>
                 </a>
-                <a href="#" class="expand-RightMenu" onClick="monomer.pageShow('#crearCajero')">
+                <a href="javascript:void(0)" class="expand-RightMenu" onClick="monomer.pageShow('#crearCajero')">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -54,7 +54,7 @@
                         
                     </li>
                 </a>
-                <a href="#" onClick="monomer.pageShow('#usuario')">
+                <a href="javascript:void(0)" onClick="monomer.pageShow('#usuario')">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -71,7 +71,7 @@
                         
                     </li>
                 </a>
-                <a  onClick="app.closeSession()">
+                <a href="javascript:void(0)" onClick="session.closeSession()">
                     <li>
                         <div>
                             <div class="test_box fab z-d1">
@@ -118,9 +118,9 @@
                         <div class="header">
                             <h2 class="color-light-blue center">Iniciar Sesión</h2>    
                         </div> 
-                        <input type="text" id="txtUsuario" value="felipe@desamovil.cl">
+                        <input type="text" id="txtUsuario" >
                         <label for="txtUsuario">Usuario</label> 
-                        <input type="password" id="txtPassword"  value="123456">
+                        <input type="password" id="txtPassword" >
                         <label for="txtPassword">Contraseña</label> 
                         <center>
                             <button onClick="splash.login()" class="raised-button blue color-white">Login</button>
@@ -158,10 +158,10 @@
                         </select>
                         <label for="cboHorario">Horario Disponibilidad</label>
 
-                        <button id="btnCrearCajero" class="floating-button orange floating-down-right
+                        <!--<button id="btnCrearCajero" class="floating-button orange floating-down-right
                          " ng-click="crearCajero()">
                             <i class="icon-1x icon-check icon-white"></i>
-                        </button>
+                        </button>-->
                         <div class="afterFloating"></div>
                     </form>
                 </div>
@@ -264,10 +264,10 @@
                         
                         <label id="lblfechaCreacion" class="displayField" ng-model="lblfechaCreacion"></label>
                         
-                        <button id="btnGuardarUsuario" class="floating-button red floating-down-right  
+                        <!--<button id="btnGuardarUsuario" class="floating-button red floating-down-right  
                          " ng-click="guardarUsuario()">
                             <i class="icon-1x icon-check icon-white"></i>
-                        </button>
+                        </button>-->
                         <div class="afterFloating"></div>
                     </form>
                 </div>
@@ -276,5 +276,6 @@
     </body>
     <script src="js/main.js"></script>
     <script src="js/services.js"></script>
+     <script src="js/gamificationServices.js"></script>
     <script src="cordova.js"></script>
 </html>
