@@ -94,8 +94,8 @@ gamification = {
       agregarPuntosXActividad : function (token, usuario , actividad) {
         setTimeout(function () {
           var objActividad = actividades.where({_id: actividad})[0];
-          agregarPuntos(token,usuario._id, objActividad.points);
-          obtenerPuntos(token,usuario._id);
+          gamification.agregarPuntos(token,usuario._id, objActividad.points);
+          gamification.obtenerPuntos(token,usuario._id);
         },1000);
       }
 };
@@ -107,14 +107,15 @@ splash = {
         if (splash.txtUsuario.length > 0){
           session.getSession(splash.txtUsuario, splash.txtPassword);
         }else{
-          debugger;
+          
           $("#avatarUsuario").attr("src",session.avatar);
         }
       }, 
       login : function () {
+        
         if($("#txtUsuario").length > 0 && $("#txtPassword").length > 0)
           {
-            session.getSession(splash.txtUsuario, splash.txtPassword);
+            session.getSession($("#txtUsuario").val(), $("#txtPassword").val());
             $("#txtUsuario, #txtPassword").removeClass("input-error");
           }else{
             $("#txtUsuario, #txtPassword").addClass("input-error");
@@ -151,7 +152,7 @@ session = {
   },
   getSession : function  (user, password ) {
     dhpService.sesion(user,password,function (data) { 
-      debugger;
+      
       if (data.data){
         session.saveUser(user,password);
         session.data = data.data[0];
@@ -164,7 +165,8 @@ session = {
         gamification.obtenerNiveles(session.token);
         gamification.obtenerActividades(session.token);              
         gamification.agregarPuntosXActividad(session.token, session.usuario, enumActividades.Usar_App);
-        monomer.pageShow("#listaCajeros");
+        monomer.pageShow("#listarCajeros");
+        busqueda.init();
         session.hideLogin(); 
       }else{
         monomer.toast("Datos Incorrectos");
@@ -271,6 +273,7 @@ busqueda = {
     busqueda.cajeros = {};
     var token = '';
     dhpService.findNear(session.token, ubicacion ,function (data) {
+
       app.myPosition = data.myPosition;
       busqueda.cajeros = data;
       busqueda.setMarker(data,'mapaCajeros');

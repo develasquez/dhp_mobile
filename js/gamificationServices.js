@@ -3,7 +3,8 @@
 
 
       var localStorage = window.localStorage;
-      function agregarPuntos(token, user_id, points, fun) {
+var gamificationServices = {
+      agregarPuntos:function(token, user_id, points, fun) {
 
         postObj ={
           user_id:user_id ,
@@ -13,32 +14,32 @@
           function (data) {
           fun(data);
         });
-      }
-      function obtenerPuntos(token, user_id, fun) {
+      },
+      obtenerPuntos:function(token, user_id, fun) {
         $.get(server + '/game/getUserPoints?token=' + token +'&user_id=' + user_id ,
           function (data) {
           fun(data);
         });
-      }
-      function obtenerMedallasUsuario(token, user_id, fun) {
+      },
+      obtenerMedallasUsuario:function(token, user_id, fun) {
         $.get(server + '/game/getUserBadges?token=' + token +'&user_id=' + user_id ,
           function (data) {
           fun(data);
         });
-      }
-      function obtenerMedallas(token,fun) {
+      },
+      obtenerMedallas:function(token,fun) {
         $.get(server + '/game/getAllBadges?token=' + token,
           function (data) {
           fun(data);
         });
-      }
-      function obtenerRetosUsuario(token, user_id, fun) {
+      },
+      obtenerRetosUsuario:function(token, user_id, fun) {
         $.get(server + '/game/getUserGoals?token=' + token +'&user_id=' + user_id ,
           function (data) {
           fun(data);
         });
-      }
-      function obtenerRetos(token, fun) {
+      },
+      obtenerRetos:function(token, fun) {
           var storedRetos = localStorage.getItem("Retos");
           if (storedRetos) {
             Retos = JSON.parse(storedRetos);
@@ -50,8 +51,8 @@
               fun(data.data);
             });
           }
-      }
-      function obtenerNiveles(token, fun) {
+      },
+      obtenerNiveles:function(token, fun) {
         var storedNiveles = localStorage.getItem("Niveles");
         if (storedNiveles) {
           Niveles = JSON.parse(storedNiveles);
@@ -63,8 +64,8 @@
             fun(data.data);
           });
         }
-      }
-      function obtenerActividades(token, fun) {
+      },
+      obtenerActividades:function(token, fun) {
         var storedActividades = localStorage.getItem("Actividades");
         if (storedActividades) {
           Actividades = JSON.parse(storedActividades);
@@ -77,3 +78,4 @@
           });
         }
       }
+}

@@ -36,7 +36,7 @@
 	    }
 	    return returnArray;
 	};
-
+	var activePage = ".page";
 	var _window={};
 	var __displayedMenu= false;
 	var em = getEmPixels() || 16;
@@ -61,6 +61,9 @@ monomer = {
 	    pageShow:function (page) {
         	$(".page").hide();
         	$(page).show();
+
+        	document.location.href = page;
+        	activePage = page;
         	$(page).velocity({"margin-left": -window.innerWidth});
     	},
     	pageClose:function (page) {
@@ -464,17 +467,12 @@ monomer = {
 				}
 			})	
 		$(window).on("hashchange",function () {
+			
 			setTimeout(function () {
 				monomer.__init();
 				monomer.__setAspect();
 			},500);
 		});
-	    /*setInterval(function () {
-	    	if(!(_window.width == window.innerWidth && _window.height == window.innerHeight)){
-				monomer.__setAspect();
-			}	
-	        //$("input, select").trigger("change");
-	    }, 100);*/
 		setTimeout(function () {
 			monomer.__init();
 			monomer.__setAspect();

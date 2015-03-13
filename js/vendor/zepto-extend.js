@@ -151,8 +151,6 @@
       })
     })(Zepto);
     ;(function () {
-  'use strict';
-
   /**
    * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
    *
