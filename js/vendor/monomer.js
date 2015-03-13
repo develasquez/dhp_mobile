@@ -417,6 +417,7 @@ monomer = {
         };
 
 	$(function () {
+		 FastClick.attach(document.body);
 		 $("body").append($("<div>").addClass("_touch"));
 		 $("body").append($("<div>").addClass("modal-backdrop").addClass("fade"));
 		 $("body").append($("<div>").addClass("loading icon-spinner icon-2x"));
@@ -468,12 +469,12 @@ monomer = {
 				monomer.__setAspect();
 			},500);
 		});
-	    setInterval(function () {
+	    /*setInterval(function () {
 	    	if(!(_window.width == window.innerWidth && _window.height == window.innerHeight)){
 				monomer.__setAspect();
 			}	
 	        //$("input, select").trigger("change");
-	    }, 100);
+	    }, 100);*/
 		setTimeout(function () {
 			monomer.__init();
 			monomer.__setAspect();

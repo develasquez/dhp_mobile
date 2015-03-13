@@ -24,6 +24,7 @@ var app = {
 
 $(function(){
     monomer.pageShow("#splash");
+    splash.init();
 });
 
 gamification = {
@@ -105,10 +106,13 @@ splash = {
       init: function(){
         if (splash.txtUsuario.length > 0){
           session.getSession(splash.txtUsuario, splash.txtPassword);
+        }else{
+          debugger;
+          $("#avatarUsuario").attr("src",session.avatar);
         }
       }, 
       login : function () {
-        if(splash.txtUsuario.length > 0 && splash.txtPassword.length > 0)
+        if($("#txtUsuario").length > 0 && $("#txtPassword").length > 0)
           {
             session.getSession(splash.txtUsuario, splash.txtPassword);
             $("#txtUsuario, #txtPassword").removeClass("input-error");
@@ -146,7 +150,8 @@ session = {
     monomer.pageShow("#splash");
   },
   getSession : function  (user, password ) {
-    dhpService.sesion(user,password,function (data) {  
+    dhpService.sesion(user,password,function (data) { 
+      debugger;
       if (data.data){
         session.saveUser(user,password);
         session.data = data.data[0];
