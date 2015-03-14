@@ -36,6 +36,10 @@
 	    }
 	    return returnArray;
 	};
+	var orientation = window.matchMedia("(orientation: portrait)");
+	orientation.onChange = function (fun) {
+		orientation.addListener(fun);
+	};
 	var activePage = ".page";
 	var _window={};
 	var __displayedMenu= false;
@@ -259,6 +263,7 @@ monomer = {
 				}
 		},
 		__setAspect : function(){
+			$(activePage).css({"margin-left": -window.innerWidth});
 			_headerHeight = 0 ;
 			_footerHeight = 0 ;
 			var aspect_16_9 = $(".aspect_16_9");
@@ -288,20 +293,20 @@ monomer = {
 	            height :window.innerHeight
 	        }
 	        $(".loading").css({"top":(window.innerHeight / 2)- em,"left":(window.innerWidth / 2) - em});
-	        if($(".page > .header").height() > 0){
+	        if($(activePage + " > .header").height() > 0){
                 _headerHeight= em * 3 + 14;
 			}
 			_header={
-	        	width:$(".page > .header").width() || 0,
+	        	width:$(activePage + " > .header").width() || 0,
 	        	height:_headerHeight
             }
 
-            if($(".page > .footer").height() > 0){
+            if($(activePage + " > .footer").height() > 0){
                 _footerHeight= em * 3 + 14;
 			}
 			
 	        _footer={
-	        	width:$(".page > .footer").width() || 0,
+	        	width:$(activePage + " > .footer").width() || 0,
 	        	height:_footerHeight
             }
             _content={
@@ -311,7 +316,7 @@ monomer = {
 	        $("body").width(_window.width).height(_window.height);
 			$(".content").height(_content.height );
 			$(".leftMenu").height(_content.height + _header.height);
-			$(".page").height(_content.height + _header.height + _footer.height );
+			$(activePage).height(_content.height + _header.height + _footer.height );
 	    	
 	    	_availHeight= window.innerHeight - _header.height - _footer.height;
 
@@ -439,7 +444,7 @@ monomer = {
 	                                    }break;
 		    			case (pointerdownLeft - event.changedTouches[0].clientX) < -SWIPELONG:{
 		    				monomer.__hideRightMenu()
-							if (pointerdownLeft < (_window.width /2)) {
+							if (pointerdownLeft < (_window.width /4)) {
 		    					monomer.__expandLeftMenu();
 		    					
 		    				};
@@ -465,7 +470,14 @@ monomer = {
 					monomer.__hideRightMenu()
 					__displayedMenu= false;
 				}
-			})	
+			})
+
+		orientation.onChange(function(m) {
+			alert(1)
+			monomer.__init();
+			monomer.__setAspect();
+		})
+
 		$(window).on("hashchange",function () {
 			
 			setTimeout(function () {
